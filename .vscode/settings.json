@@ -1,0 +1,11 @@
+{
+    "java.project.sourcePaths": [
+        "backend-code",
+        "backend-code\\src",
+        "backend-code\\src\\main",
+        "backend-code\\src\\main\\java",
+        "backend-code\\src\\main\\java\\com",
+        "backend-code\\src\\main\\java\\com\\upgrad",
+        "backend-code\\src\\main\\java\\com\\upgrad\\ecommerce"
+    ]
+}
