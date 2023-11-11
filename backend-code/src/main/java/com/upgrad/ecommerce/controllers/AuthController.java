@@ -3,6 +3,7 @@ package com.upgrad.ecommerce.controllers;
 import com.upgrad.ecommerce.dto.LoginRequest;
 import com.upgrad.ecommerce.dto.MessageResponse;
 import com.upgrad.ecommerce.dto.SignupRequest;
+import com.upgrad.ecommerce.dto.UserInfoResponse;
 import com.upgrad.ecommerce.models.ERole;
 import com.upgrad.ecommerce.models.Role;
 import com.upgrad.ecommerce.models.User;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.*;
+import java.util.stream.*;
 
 import static org.springframework.http.ResponseEntity.ok;
 
@@ -59,19 +61,14 @@ public class AuthController {
 
         String token = jwtUtils.generateTokenFromUsername(userDetails.getEmail());
 
-        Map<Object, Object> model = new HashMap<>();
-        model.put("token", token);
-        return ok(model);
+       List<String> roles = userDetails.getAuthorities().stream()
+               .map(item -> item.getAuthority())
+               .collect(Collectors.toList());
 
-//        List<String> roles = userDetails.getAuthorities().stream()
-//                .map(item -> item.getAuthority())
-//                .collect(Collectors.toList());
-//
-//        return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
-//                .body(new UserInfoResponse(userDetails.getId(),
-//                        userDetails.getUsername(),
-//                        userDetails.getEmail(),
-//                        roles));
+       return ResponseEntity.ok().body(new UserInfoResponse(userDetails.getId(),
+                       userDetails.getUsername(),
+                       userDetails.getEmail(),
+                       roles, token));
     }
 
     @PostMapping("/signup")

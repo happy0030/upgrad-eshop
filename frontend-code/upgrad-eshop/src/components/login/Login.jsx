@@ -50,14 +50,9 @@ function Login() {
       await axios
         .post("http://localhost:8080/api/auth/signin", body, header)
         .then((response) => {
-          const token = response.headers.get("x-auth-token");
-          //set user details to null so that it can be verified later
-          let user = null;
-          if (token) {
-            setToken(token);
-          }
-          user = response.data;
+          const user = response.data;
           if (user != null) {
+            setToken(user.token);
             //set the role to admin if the roles contain ADMIN, setAdmin using authContext
             if (user.roles[0] === "ADMIN") {
               setIsAdmin(true);
