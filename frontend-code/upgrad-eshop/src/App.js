@@ -7,6 +7,7 @@ import Signup from './components/signup/Signup';
 import ProductsContainer from './components/products/Products';
 import AddEditProduct from './components/add-edit-products/AddEditProduct';
 import ProductDetail from './components/product-detail/ProductDetail';
+import Orders from './components/place-order/Orders';
 
 const appTheme = createTheme({
   palette: {
@@ -32,6 +33,7 @@ function App() {
           <Route path="/edit-product/:id" element={<AddEditProduct/>} />
           <Route path="/add-product" element={<AddEditProduct/>} />
           <Route path="/products/:id" element={<ProductDetail/>} />
+          <Route path="/order" element={<Orders/>} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
